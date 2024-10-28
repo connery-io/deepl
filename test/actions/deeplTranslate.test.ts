@@ -1,8 +1,8 @@
-import { handler } from '../../src/actions/translatetextwithdeepl';
+import { handler } from '../../src/actions/deeplTranslate';
 
 // TODO #1: Rename xit() to it() to enable the test.
 // TODO #2: Change the test name below to match your use case.
-xit('should verify if the translatetextwithdeepl action works as expected', async () => {
+xit('should verify if the deeplTranslate action works as expected', async () => {
   const input = {
     /* TODO #3: Specify input for the action. */
   };

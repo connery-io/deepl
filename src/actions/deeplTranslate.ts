@@ -4,7 +4,8 @@ import axios from 'axios';
 const actionDefinition: ActionDefinition = {
   key: 'deeplTranslate',
   name: 'DeepL Translate',
-  description: 'Translates text using DeepL API for a specified language with optional instructions. Note: user needs to explicitly mention Deepl and the target language in the request.',
+  description:
+    'Translates text using DeepL API for a specified language with optional instructions. Note: user needs to explicitly mention Deepl and the target language in the request.',
   type: 'read',
   inputParameters: [
     {
@@ -49,7 +50,7 @@ const actionDefinition: ActionDefinition = {
   },
   outputParameters: [
     {
-      key: 'textResponse',
+      key: 'translatedText',
       name: 'Translated Text',
       description: 'The translated text with optional instructions',
       type: 'string',
@@ -62,35 +63,30 @@ const actionDefinition: ActionDefinition = {
 
 export default actionDefinition;
 
-export async function handler({ input }: ActionContext): Promise<{ textResponse: string }> {
+export async function handler({ input }: ActionContext): Promise<{ translatedText: string }> {
   const { apiKey, text, targetLanguage, instructions } = input;
 
-  try {
-    const response = await axios.post(
-      'https://api-free.deepl.com/v2/translate',
-      {
-        text: [text],
-        target_lang: targetLanguage,
+  const response = await axios.post(
+    'https://api-free.deepl.com/v2/translate',
+    {
+      text: [text],
+      target_lang: targetLanguage,
+    },
+    {
+      headers: {
+        Authorization: `DeepL-Auth-Key ${apiKey}`,
+        'Content-Type': 'application/json',
       },
-      {
-        headers: {
-          'Authorization': `DeepL-Auth-Key ${apiKey}`,
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+    },
+  );
 
-    let translatedText = response.data.translations[0].text;
+  let translatedText = response.data.translations[0].text;
 
-    if (instructions) {
-      translatedText = `Instructions for the following content: ${instructions}\n\n${translatedText}`;
-    }
-
-    return { textResponse: translatedText };
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      throw new Error(`DeepL API error: ${error.response?.data?.message || error.message}`);
-    }
-    throw new Error('An unexpected error occurred during translation');
+  if (instructions) {
+    translatedText = `Instructions for the following content: ${instructions}\n\n${translatedText}`;
   }
+
+  return {
+    translatedText,
+  };
 }

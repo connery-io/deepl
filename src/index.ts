@@ -1,5 +1,5 @@
 import { PluginDefinition, setupPluginServer } from 'connery';
-import translatetextwithdeepl from "./actions/translatetextwithdeepl.js";
+import translatetextwithdeepl from './actions/deeplTranslate.js';
 
 const pluginDefinition: PluginDefinition = {
   name: 'Deepl',
