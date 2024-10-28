@@ -1,11 +1,11 @@
-# Deepl
+# DeepL
 
-Connery plugin to use Deepl&#x27;s translation service.
+Connery plugin to use DeepL translation service.
 
 The plugin currently contains one action 'DeepL Translate':
 
 - Translates text to a specified language with optional instructions.
-- Requires the user to explicitly mention Deepl and the target language in the request.
+- Requires the user to explicitly mention DeepL and the target language in the request.
 - Optional instructions for Connery assistant to process the translated text can be added.
 
 ## Repository structure

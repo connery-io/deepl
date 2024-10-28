@@ -5,7 +5,7 @@ const actionDefinition: ActionDefinition = {
   key: 'deeplTranslate',
   name: 'DeepL Translate',
   description:
-    'Translates text using DeepL API for a specified language with optional instructions. Note: user needs to explicitly mention Deepl and the target language in the request.',
+    'Translates text using DeepL API for a specified language with optional instructions. Note: user needs to explicitly mention DeepL and the target language in the request.',
   type: 'read',
   inputParameters: [
     {
